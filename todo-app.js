@@ -47,7 +47,7 @@ let renderTodos = function(todos, filters) {
 
 renderTodos(todos, filters);
 
-document.querySelector('#new-todos').addEventListener('input', function(e){
+document.querySelector('#filter').addEventListener('input', function(e){
     filters.text = e.target.value.toLowerCase();
     renderTodos(todos, filters);
 })
