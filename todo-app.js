@@ -15,12 +15,13 @@ const todos = [{
     completed: false
 }];
 
+
+
 let arr = [];
 todos.forEach(function(todo) {
     if (todo.completed === false) {
         arr.push(todo.text)
     }
-
 })
 
 let filters = {
@@ -47,13 +48,17 @@ let renderTodos = function(todos, filters) {
 
 renderTodos(todos, filters);
 
-document.querySelector('#new-todos').addEventListener('input', function(e){
+document.querySelector('#filter').addEventListener('input', function(e){
     filters.text = e.target.value.toLowerCase();
     renderTodos(todos, filters);
 })
 
 document.querySelector('#form').addEventListener('submit', function(e){
     e.preventDefault();
-    var title = document.querySelector('input[type="text"]').value;
-    addTask(title, false);
+    let newObject = {text: e.target.elements.firstName.value, completed: false};
+    todos.push(newObject);
+    renderTodos(todos, filters);
+    e.target.elements.firstName.value = '';
+    arr.length++;
+    renderTodos(todos, filters);
 })
