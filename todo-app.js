@@ -17,20 +17,11 @@ const todos = [{
 
 
 
-let arr = [];
-todos.forEach(function(todo) {
-    if (todo.completed === false) {
-        arr.push(todo.text)
-    }
-})
-
 let filters = {
     text: ''
 }
 
-let h2 = document.createElement('h2');
-h2.textContent = `You have ${arr.length} uncompleted todos`;
-document.querySelector('body').appendChild(h2);
+
 
 let renderTodos = function(todos, filters) {
     let filteredTodo = todos.filter(function(todo){
@@ -38,12 +29,20 @@ let renderTodos = function(todos, filters) {
     })
     document.querySelector('#todo').innerHTML = '';
 
+    const incompleteTodos = filteredTodo.filter(function (todos) {
+        return !todos.completed
+    })
+
+
+    const summary = document.createElement('h2')
+    summary.textContent = `You have ${incompleteTodos.length} todos left`
+    document.querySelector('#todo').appendChild(summary)
+
     filteredTodo.forEach(function(todo){
         let p = document.createElement('p');
         p.textContent = todo.text;
         document.querySelector('#todo').appendChild(p);
     })
-    
 }
 
 renderTodos(todos, filters);
@@ -55,10 +54,14 @@ document.querySelector('#filter').addEventListener('input', function(e){
 
 document.querySelector('#form').addEventListener('submit', function(e){
     e.preventDefault();
-    let newObject = {text: e.target.elements.firstName.value, completed: false};
-    todos.push(newObject);
+    todos.push({
+        text: e.target.elements.firstName.value,
+        completed: false
+    })
     renderTodos(todos, filters);
     e.target.elements.firstName.value = '';
-    arr.length++;
-    renderTodos(todos, filters);
+})
+
+document.querySelector('#checkbox').addEventListener('change', function(e){
+    e.target.checked;   //the boolean the checks id the checkbox is true or false
 })
