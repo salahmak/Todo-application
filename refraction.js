@@ -5,7 +5,7 @@ const getSavedTodos = function() {
     if (todoJSON !== null) {
     return JSON.parse(todoJSON)
     } else {
-        return [];
+        return []
     }
 }
 
